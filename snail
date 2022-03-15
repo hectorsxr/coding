@@ -1,0 +1,39 @@
+function getExternalSquare(array, result) {
+  for (let i = 0; i < array[0].length; i += 1) {
+    result.push(array[0][i]);
+  }
+
+  const rowsLeft = array.length - 1;
+  
+  for (let i = 1; i <= rowsLeft; i += 1) {
+    result.push(array[i][array[i].length - 1]);
+  }
+
+  for (let i = array[array.length - 1].length - 2; i > -1; i -= 1) {
+    result.push(array[array.length - 1][i])
+  }
+  
+  for (let i = rowsLeft - 1; i >0 ; i -= 1) {
+    result.push(array[i][0]);
+  }
+}
+
+snail = function(array) {
+  // enjoy
+  const result = [];
+  while(array.length && array[0].length) {
+    getExternalSquare(array, result)
+    array.shift()
+    array.pop()
+    for (let i = 0; i < array.length; i += 1) {
+      array[i].shift();
+      array[i].pop();
+    }
+  }
+
+  if (array.length && array[0].length && result.length > 1 && array.length === 1) {
+    result.push(array[0][0]);
+  }
+  
+  return result;
+}
